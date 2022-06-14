@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:id="@+id/masterLayout">
+
+    <de.clinc8686.lautsprecher.MasterToggleButton
+        android:id="@+id/masterToggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textOff="All off"
+        android:textOn="All on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:layout_gravity="center" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ToggleButton
+            android:id="@+id/centerButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="Center off"
+            android:textOn="Center on" />
+
+        <ToggleButton
+            android:id="@+id/subwooferButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="Subwoofer off"
+            android:textOn="Subwoofer on" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <de.clinc8686.lautsprecher.MasterToggleButton
+            android:id="@+id/frontButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="Front off"
+            android:textOn="Front on"
+            app:slavesDisabled="true"/>
+
+        <de.clinc8686.lautsprecher.MasterToggleButton
+            android:id="@+id/rearButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="Rear off"
+            android:textOn="Rear on"
+            app:slavesDisabled="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ToggleButton
+            android:id="@+id/frontLeftButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textOff="Left off"
+            android:textOn="Left on" />
+
+        <ToggleButton
+            android:id="@+id/frontRightButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textOff="Right off"
+            android:textOn="Right on" />
+
+        <ToggleButton
+            android:id="@+id/rearLeftButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textOff="Left off"
+            android:textOn="Left on" />
+
+        <ToggleButton
+            android:id="@+id/rearRightButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textOff="Right off"
+            android:textOn="Right on" />
+    </LinearLayout>
+</LinearLayout>
