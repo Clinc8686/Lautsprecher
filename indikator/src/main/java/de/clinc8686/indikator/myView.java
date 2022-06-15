@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -66,10 +67,25 @@ public class myView extends View {
         super.onDraw(canvas);
 
         drawRectangles(canvas);
-        drawButtons(canvas);
+        //drawButtons(canvas); Buttons könne nuach in Indikator gezeichnet werden bzw in der normalen activty_indikator.xml und dann hier onCLick methode zum abfangen & ändern
     }
 
-    private void drawButtons(Canvas canvas) {
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int w = widthMeasureSpec;
+        if(getLayoutParams().width == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            w = width;
+        }
+
+        int h = heightMeasureSpec;
+        if(getLayoutParams().height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            h = height;
+        }
+        setMeasuredDimension(w, h);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+/*    private void drawButtons(Canvas canvas) {
         String[] text = {"First", "Previous", "Next", "Last"};
         int left = 30, top = 110, right = 260, bottom = 190;
         for(int i = 0; i < 4; i++) {
@@ -88,7 +104,7 @@ public class myView extends View {
             left += 250;
             right += 250;
         }
-    }
+    }*/
 
     private void drawRectangles(Canvas canvas) {
         int left = 30, top = 30, right = 180, bottom = 80;
