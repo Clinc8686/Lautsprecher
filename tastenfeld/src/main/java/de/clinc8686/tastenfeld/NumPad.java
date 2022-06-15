@@ -4,14 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-public class NumPad extends TableLayout implements View.OnClickListener{
-    OnNumClickListener oncl;
+public class NumPad extends TableLayout {
+    OnNumClickListener mOnNUmClickListener;
     public NumPad(Context context) {
         super(context);
         setup();
@@ -22,14 +20,9 @@ public class NumPad extends TableLayout implements View.OnClickListener{
         setup();
     }
 
-    public void setOnClickListener(OnNumClickListener onNumClickListener) {
-        oncl = onNumClickListener;
+    public void setOnNumClickListener(OnNumClickListener onNumClickListener) {
+        mOnNUmClickListener = onNumClickListener;
         Log.e("xy", "setOnClickListener!");
-    }
-
-    @Override
-    public void onClick(View view) {
-        Log.e("xyz", "onClicked");
     }
 
     public interface OnNumClickListener {
@@ -43,10 +36,34 @@ public class NumPad extends TableLayout implements View.OnClickListener{
 
     private void addListeners() {
         TableLayout tl = findViewById(R.id.tableLayout);
+        for(int i = 0; i < tl.getChildCount(); i++) {
+            TableRow tr = (TableRow) tl.getChildAt(i);
+            for(int j = 0; j < tr.getChildCount(); j++) {
+                Button b = (Button) tr.getChildAt(j);
+                b.setOnClickListener(this::onNumClick);
+            }
+        }
 
+        //tl.setOnClickListener(this::onNumClick);    //Das hier fr alle Buttons machen - gemacht
     }
 
-    public void action(View v) {
-        Log.e("xyz", "action!");
+    public void onNumClick(View v) {
+        //TableLayout t = findViewById(R.id.tableLayout); //Hier eigentlich direkter button, aber keien id fr BUttons deshalb nur über parent erreichbar
+        //Button b = (Button) ((TableRow) t.getChildAt(0)).getChildAt(0);
+
+        char number = 99;
+        TableLayout tl = findViewById(R.id.tableLayout);
+        for(int i = 0; i < tl.getChildCount(); i++) {
+            TableRow tr = (TableRow) tl.getChildAt(i);
+            for(int j = 0; j < tr.getChildCount(); j++) {
+                Button b = (Button) tr.getChildAt(j);
+                b.setOnClickListener(this::onNumClick);
+                number = b.getText().toString().charAt(0);
+            }
+        }
+
+        if(mOnNUmClickListener != null || number == 99) {
+            mOnNUmClickListener.onNumClick(v, number);
+        }
     }
 }

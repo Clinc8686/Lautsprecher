@@ -14,11 +14,11 @@ public class Tastenfeld extends AppCompatActivity {
         setContentView(R.layout.activity_tastenfeld);
 
         NumPad np = findViewById(R.id.numpadInMain);
-        np.setOnClickListener(new NumPad.OnNumClickListener() {
+        np.setOnNumClickListener(new NumPad.OnNumClickListener() {
 
             @Override
             public void onNumClick(View v, char num) {
-                Log.e("a", "onNumClick");
+                Log.e("a", "onNumClick" + num);
             }
         });
     }
